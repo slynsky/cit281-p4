@@ -6,333 +6,333 @@ This project really helped me learn to combine skills I had been learning throug
 
 ## Code
 ### p4-data.js
-// Question and answer data array
-const data = [
-    {
-      question: "Q1",
-      answer: "A1",
-    },
-    {
-      question: "Q2",
-      answer: "A2",
-    },
-    {
-      question: "Q3",
-      answer: "A3",
-    },
-];
+// Question and answer data array<br>
+const data = [<br>
+    {<br>
+      question: "Q1",<br>
+      answer: "A1",<br>
+    },<br>
+    {<br>
+      question: "Q2",<br>
+      answer: "A2",<br>
+    },<br>
+    {<br>
+      question: "Q3",<br>
+      answer: "A3",<br>
+    },<br>
+];<br>
   
-// Export statement must be below data declaration - no hoisting with const
-module.exports = {
-  data,
-};
+// Export statement must be below data declaration - no hoisting with const<br>
+module.exports = {<br>
+  data,<br>
+};<br>
 
-### p4-module.js
-const {data} = require('./p4-data.js');
+### p4-module.js<br>
+const {data} = require('./p4-data.js');<br>
 
-function getQuestions() {
-    let questionsArray = []
-    for (const object of data) {
-        questionsArray.push(object.question)
-    }
-    return questionsArray;
+function getQuestions() {<br>
+    let questionsArray = []<br>
+    for (const object of data) {<br>
+        questionsArray.push(object.question)<br>
+    }<br>
+    return questionsArray;<br>
+}<br>
+
+function getAnswers() {<br>
+    let answersArray = []<br>
+    for (const object of data) {<br>
+        answersArray.push(object.answer)<br>
+    }<br>
+    return answersArray;<br>
+}<br>
+
+function getQuestionsAnswers() {<br>
+    const clonedData = [...data]; //extra credit?<br>
+    return clonedData;<br>
 }
 
-function getAnswers() {
-    let answersArray = []
-    for (const object of data) {
-        answersArray.push(object.answer)
-    }
-    return answersArray;
-}
+function getQuestion(number="") {<br>
+    const parsedNumber = parseInt(number);<br>
+    const index = parsedNumber-1;<br>
+    switch (true) {<br>
+        case data[index] !== undefined:<br>
+            questionResult = data[index].question;<br>
+            numberResult = parsedNumber;<br>
+            errorResult = "";<br>
+            break;<br>
+        case parsedNumber < 1:<br>
+            questionResult = "";<br>
+            numberResult = "";<br>
+            errorResult = "Question number must be >= 1";<br>
+            break;<br>
+        case parsedNumber > 3:<br>
+            questionResult = "";<br>
+            numberResult = "";<br>
+            errorResult = "Question number must be less than the number of questions (3)";<br>
+            break;<br>
+        default:<br>
+            questionResult = "";<br>
+            numberResult = "";<br>
+            errorResult = "Question number must be an integer"<br>
+    }<br>
+    let questionObject = {question: questionResult, number: numberResult, error: errorResult};<br>
+    return questionObject;<br>
+}<br>
 
-function getQuestionsAnswers() {
-    const clonedData = [...data]; //extra credit?
-    return clonedData;
-}
+function getAnswer(number="") {<br>
+    const parsedNumber = parseInt(number);<br>
+    const index = parsedNumber-1;<br>
+    switch (true) {<br>
+        case data[index] !== undefined:<br>
+            answerResult = data[index].answer;<br>
+            numberResult = parsedNumber;<br>
+            errorResult = "";<br>
+            break;<br>
+        case parsedNumber < 1:<br>
+            answerResult = "";<br>
+            numberResult = "";<br>
+            errorResult = "Answer number must be >= 1";<br>
+            break;<br>
+        case parsedNumber > 3:<br>
+            answerResult = "";<br>
+            numberResult = "";<br>
+            errorResult = "Answer number must be less than the number of questions (3)";<br>
+            break;<br>
+        default:<br>
+            answerResult = "";<br>
+            numberResult = "";<br>
+            errorResult = "Answer number must be an integer"<br>
+    }<br>
+    let AnswerObject = {answer: answerResult, number: numberResult, error: errorResult};<br>
+    return AnswerObject;<br>
+}<br>
 
-function getQuestion(number="") {
-    const parsedNumber = parseInt(number);
-    const index = parsedNumber-1;
-    switch (true) {
-        case data[index] !== undefined:
-            questionResult = data[index].question;
-            numberResult = parsedNumber;
-            errorResult = "";
-            break;
-        case parsedNumber < 1:
-            questionResult = "";
-            numberResult = "";
-            errorResult = "Question number must be >= 1";
-            break;
-        case parsedNumber > 3:
-            questionResult = "";
-            numberResult = "";
-            errorResult = "Question number must be less than the number of questions (3)";
-            break;
-        default:
-            questionResult = "";
-            numberResult = "";
-            errorResult = "Question number must be an integer"
-    }
-    let questionObject = {question: questionResult, number: numberResult, error: errorResult};
-    return questionObject;
-}
-
-function getAnswer(number="") {
-    const parsedNumber = parseInt(number);
-    const index = parsedNumber-1;
-    switch (true) {
-        case data[index] !== undefined:
-            answerResult = data[index].answer;
-            numberResult = parsedNumber;
-            errorResult = "";
-            break;
-        case parsedNumber < 1:
-            answerResult = "";
-            numberResult = "";
-            errorResult = "Answer number must be >= 1";
-            break;
-        case parsedNumber > 3:
-            answerResult = "";
-            numberResult = "";
-            errorResult = "Answer number must be less than the number of questions (3)";
-            break;
-        default:
-            answerResult = "";
-            numberResult = "";
-            errorResult = "Answer number must be an integer"
-    }
-    let AnswerObject = {answer: answerResult, number: numberResult, error: errorResult};
-    return AnswerObject;
-}
-
-function getQuestionAnswer(number="") {
-    const parsedNumber = parseInt(number);
-    const index = parsedNumber-1;
-    switch (true) {
-        case data[index] !== undefined:
-            questionResult = data[index].question;
-            answerResult = data[index].answer;
-            numberResult = parsedNumber;
-            errorResult = "";
-            break;
-        case parsedNumber < 1:
-            questionResult = "";
-            answerResult = "";
-            numberResult = "";
-            errorResult = "Question number must be >= 1";
-            break;
-        case parsedNumber > 3:
-            questionResult = "";
-            answerResult = "";
-            numberResult = "";
-            errorResult = "Question number must be less than the number of questions (3)";
-            break;
-        default:
-            questionResult = "";
-            answerResult = "";
-            numberResult = "";
-            errorResult = "Question number must be an integer"
-    }
-    let qAndAObject = {question: questionResult, answer: answerResult, number: numberResult, error: errorResult};
-    return qAndAObject;
-}
+function getQuestionAnswer(number="") {<br>
+    const parsedNumber = parseInt(number);<br>
+    const index = parsedNumber-1;<br>
+    switch (true) {<br>
+        case data[index] !== undefined:<br>
+            questionResult = data[index].question;<br>
+            answerResult = data[index].answer;<br>
+            numberResult = parsedNumber;<br>
+            errorResult = "";<br>
+            break;<br>
+        case parsedNumber < 1:<br>
+            questionResult = "";<br>
+            answerResult = "";<br>
+            numberResult = "";<br>
+            errorResult = "Question number must be >= 1";<br>
+            break;<br>
+        case parsedNumber > 3:<br>
+            questionResult = "";<br>
+            answerResult = "";<br>
+            numberResult = "";<br>
+            errorResult = "Question number must be less than the number of questions (3)";<br>
+            break;<br>
+        default:<br>
+            questionResult = "";<br>
+            answerResult = "";<br>
+            numberResult = "";<br>
+            errorResult = "Question number must be an integer"<br>
+    }<br>
+    let qAndAObject = {question: questionResult, answer: answerResult, number: numberResult, error: errorResult};<br>
+    return qAndAObject;<br>
+}<br>
 
 
-module.exports = {
-    getQuestions,
-    getAnswers,
-    getQuestionsAnswers,
-    getQuestion,
-    getAnswer,
-    getQuestionAnswer
-};
+module.exports = {<br>
+    getQuestions,<br>
+    getAnswers,<br>
+    getQuestionsAnswers,<br>
+    getQuestion,<br>
+    getAnswer,<br>
+    getQuestionAnswer<br>
+};<br>
 
 
-/*****************************
-  Module function testing
-******************************/
-function testing(category, ...args) {
-    console.log(`\n** Testing ${category} **`);
-    console.log("-------------------------------");
-    for (const o of args) {
-        console.log(`-> ${category}${o.d}:`);
-        console.log(o.f);
-    }
-}
+/*****************************<br>
+  Module function testing<br>
+******************************/<br>
+function testing(category, ...args) {<br>
+    console.log(`\n** Testing ${category} **`);<br>
+    console.log("-------------------------------");<br>
+    for (const o of args) {<br>
+        console.log(`-> ${category}${o.d}:`);<br>
+        console.log(o.f);<br>
+    }<br>
+}<br>
   
-// Set a constant to true to test the appropriate function
-const testGetQs = false;
-const testGetAs = false;
-const testGetQsAs = false;
-const testGetQ = false;
-const testGetA = false;
-const testGetQA = false;
-const testAdd = false;      // Extra credit
-const testUpdate = false;   // Extra credit
-const testDelete = false;   // Extra credit
+// Set a constant to true to test the appropriate function<br>
+const testGetQs = false;<br>
+const testGetAs = false;<br>
+const testGetQsAs = false;<br>
+const testGetQ = false;<br>
+const testGetA = false;<br>
+const testGetQA = false;<br>
+const testAdd = false;      // Extra credit<br>
+const testUpdate = false;   // Extra credit<br>
+const testDelete = false;   // Extra credit<br>
 
-// getQuestions()
-if (testGetQs) {
-    testing("getQuestions", { d: "()", f: getQuestions() });
-}
+// getQuestions()<br>
+if (testGetQs) {<br>
+    testing("getQuestions", { d: "()", f: getQuestions() });<br>
+}<br>
   
-// getAnswers()
-if (testGetAs) {
-    testing("getAnswers", { d: "()", f: getAnswers() });
-}
+// getAnswers()<br>
+if (testGetAs) {<br>
+    testing("getAnswers", { d: "()", f: getAnswers() });<br>
+}<br>
   
-// getQuestionsAnswers()
-if (testGetQsAs) {
-    testing("getQuestionsAnswers", { d: "()", f: getQuestionsAnswers() });
-}
+// getQuestionsAnswers()<br>
+if (testGetQsAs) {<br>
+    testing("getQuestionsAnswers", { d: "()", f: getQuestionsAnswers() });<br>
+}<br>
   
-// getQuestion()
-if (testGetQ) {
-    testing(
-        "getQuestion",
-        { d: "()", f: getQuestion() },      // Extra credit: +1
-        { d: "(0)", f: getQuestion(0) },    // Extra credit: +1
-        { d: "(1)", f: getQuestion(1) },
-        { d: "(4)", f: getQuestion(4) }     // Extra credit: +1
-    );
-}
+// getQuestion()<br>
+if (testGetQ) {<br>
+    testing(<br>
+        "getQuestion",<br>
+        { d: "()", f: getQuestion() },      // Extra credit: +1<br>
+        { d: "(0)", f: getQuestion(0) },    // Extra credit: +1<br>
+        { d: "(1)", f: getQuestion(1) },<br>
+        { d: "(4)", f: getQuestion(4) }     // Extra credit: +1<br>
+    );<br>
+}<br>
   
-// getAnswer()
-if (testGetA) {
-    testing(
-        "getAnswer",
-        { d: "()", f: getAnswer() },        // Extra credit: +1
-        { d: "(0)", f: getAnswer(0) },      // Extra credit: +1
-        { d: "(1)", f: getAnswer(1) },
-        { d: "(4)", f: getAnswer(4) }       // Extra credit: +1
-    );
-}
+// getAnswer()<br>
+if (testGetA) {<br>
+    testing(<br>
+        "getAnswer",<br>
+        { d: "()", f: getAnswer() },        // Extra credit: +1<br>
+        { d: "(0)", f: getAnswer(0) },      // Extra credit: +1<br>
+        { d: "(1)", f: getAnswer(1) },<br>
+        { d: "(4)", f: getAnswer(4) }       // Extra credit: +1<br>
+    );<br>
+}<br>
   
-// getQuestionAnswer()
-if (testGetQA) {
-    testing(
-        "getQuestionAnswer",
-        { d: "()", f: getQuestionAnswer() },    // Extra credit: +1
-        { d: "(0)", f: getQuestionAnswer(0) },  // Extra credit: +1
-        { d: "(1)", f: getQuestionAnswer(1) },
-        { d: "(4)", f: getQuestionAnswer(4) }   // Extra credit: +1
-    );
-}
+// getQuestionAnswer()<br>
+if (testGetQA) {<br>
+    testing(<br>
+        "getQuestionAnswer",<br>
+        { d: "()", f: getQuestionAnswer() },    // Extra credit: +1<br>
+        { d: "(0)", f: getQuestionAnswer(0) },  // Extra credit: +1<br>
+        { d: "(1)", f: getQuestionAnswer(1) },<br>
+        { d: "(4)", f: getQuestionAnswer(4) }   // Extra credit: +1<br>
+    );<br>
+}<br>
 
 ## p4-server.js
-const fastify = require("fastify")(); 
-const {getQuestions, getAnswers, getQuestionsAnswers, getQuestion, getAnswer, getQuestionAnswer} = require('./p4-module.js');
+const fastify = require("fastify")(); <br>
+const {getQuestions, getAnswers, getQuestionsAnswers, getQuestion, getAnswer, getQuestionAnswer} = require('./p4-module.js');<br>
 
-fastify.get("/cit/question", function (request, reply) {
-    const response = {
-        "error": "",
-        "statusCode": 200,
-        "questions": getQuestions()
-    }
-    reply
-    .code(200)
-    .header("Content-Type", "application/json; charset=utf-8")
-    .send(response);
-});
+fastify.get("/cit/question", function (request, reply) {<br>
+    const response = {<br>
+        "error": "",<br>
+        "statusCode": 200,<br>
+        "questions": getQuestions()<br>
+    }<br>
+    reply<br>
+    .code(200)<br>
+    .header("Content-Type", "application/json; charset=utf-8")<br>
+    .send(response);<br>
+});<br>
 
-fastify.get("/cit/answer", function (request, reply) {
-    const response = {
-        "error": "",
-        "statusCode": 200,
-        "answers": getAnswers()
-    }
-    reply
-    .code(200)
-    .header("Content-Type", "application/json; charset=utf-8")
-    .send(response);
-});
+fastify.get("/cit/answer", function (request, reply) {<br>
+    const response = {<br>
+        "error": "",<br>
+        "statusCode": 200,<br>
+        "answers": getAnswers()<br>
+    }<br>
+    reply<br>
+    .code(200)<br>
+    .header("Content-Type", "application/json; charset=utf-8")<br>
+    .send(response);<br>
+});<br>
 
-fastify.get("/cit/questionanswer", function (request, reply) {
-    const response = {
-        "error": "",
-        "statusCode": 200,
-        "questions_answers": getQuestionsAnswers()
-    }
-    reply
-    .code(200)
-    .header("Content-Type", "application/json; charset=utf-8")
-    .send(response);
-});
+fastify.get("/cit/questionanswer", function (request, reply) {<br>
+    const response = {<br><br>
+        "error": "",<br>
+        "statusCode": 200,<br>
+        "questions_answers": getQuestionsAnswers()<br>
+    }<br>
+    reply<br>
+    .code(200)<br>
+    .header("Content-Type", "application/json; charset=utf-8")<br>
+    .send(response);<br>
+});<br>
 
-//http://localhost:8080/cit/question/:number?number=2
-fastify.get("/cit/question/:number", function (request, reply) {
-    console.log(request.query);
-    const { number } = request.query;
-    const questionNumber = getQuestion(number);
-    const response = {
-        "error": questionNumber.error,
-        "statusCode": 200,
-        "question": questionNumber.question,
-        "number": questionNumber.number
-    }
-    reply
-    .code(200)
-    .header("Content-Type", "application/json; charset=utf-8")
-    .send(response);
-});
+//http://localhost:8080/cit/question/:number?number=2<br>
+fastify.get("/cit/question/:number", function (request, reply) {<br>
+    console.log(request.query);<br>
+    const { number } = request.query;<br>
+    const questionNumber = getQuestion(number);<br>
+    const response = {<br>
+        "error": questionNumber.error,<br>
+        "statusCode": 200,<br>
+        "question": questionNumber.question,<br>
+        "number": questionNumber.number<br>
+    }<br>
+    reply<br>
+    .code(200)<br>
+    .header("Content-Type", "application/json; charset=utf-8")<br>
+    .send(response);<br>
+});<br>
 
-//http://localhost:8080/cit/answer/:number?number=1
-fastify.get("/cit/answer/:number", function (request, reply) {
-    console.log(request.query);
-    const { number } = request.query;
-    const answerNumber = getAnswer(number);
-    const response = {
-        "error": answerNumber.error,
-        "statusCode": 200,
-        "answer": answerNumber.answer,
-        "number": answerNumber.number
-    }
-    reply
-    .code(200)
-    .header("Content-Type", "application/json; charset=utf-8")
-    .send(response);
-});
+//http://localhost:8080/cit/answer/:number?number=1<br>
+fastify.get("/cit/answer/:number", function (request, reply) {<br>
+    console.log(request.query);<br>
+    const { number } = request.query;<br>
+    const answerNumber = getAnswer(number);<br>
+    const response = {<br>
+        "error": answerNumber.error,<br>
+        "statusCode": 200,<br>
+        "answer": answerNumber.answer,<br>
+        "number": answerNumber.number<br>
+    }<br>
+    reply<br>
+    .code(200)<br>
+    .header("Content-Type", "application/json; charset=utf-8")<br>
+    .send(response);<br>
+});<br>
 
-//http://localhost:8080/cit/questionanswer/:number?number=3
-fastify.get("/cit/questionanswer/:number", function (request, reply) {
-    console.log(request.query);
-    const { number } = request.query;
-    const qAndANumber = getQuestionAnswer(number);
-    const response = {
-        "error": qAndANumber.error,
-        "statusCode": 200,
-        "question": qAndANumber.question,
-        "answer": qAndANumber.answer,
-        "number": qAndANumber.number
-    }
-    reply
-    .code(200)
-    .header("Content-Type", "application/json; charset=utf-8")
-    .send(response);
-});
+//http://localhost:8080/cit/questionanswer/:number?number=3<br>
+fastify.get("/cit/questionanswer/:number", function (request, reply) {<br>
+    console.log(request.query);<br>
+    const { number } = request.query;<br>
+    const qAndANumber = getQuestionAnswer(number);<br>
+    const response = {<br>
+        "error": qAndANumber.error,<br>
+        "statusCode": 200,<br>
+        "question": qAndANumber.question,<br>
+        "answer": qAndANumber.answer,<br>
+        "number": qAndANumber.number<br>
+    }<br>
+    reply<br>
+    .code(200)<br>
+    .header("Content-Type", "application/json; charset=utf-8")<br>
+    .send(response);<br>
+});<br>
 
-fastify.get("*", function (request, reply) {
-    const response = {
-        "error": "Route not found",
-        "statusCode": 404
-    }
-    reply
-    .code(404)
-    .header("Content-Type", "application/json; charset=utf-8")
-    .send(response);
-});
+fastify.get("*", function (request, reply) {<br>
+    const response = {<br>
+        "error": "Route not found",<br>
+        "statusCode": 404<br>
+    }<br>
+    reply<br>
+    .code(404)<br>
+    .header("Content-Type", "application/json; charset=utf-8")<br>
+    .send(response);<br>
+});<br>
 
-const listenIP = "localhost";
-const listenPort = 8080;
-fastify.listen(listenPort, listenIP, function (err, address) {
-    if (err) {
-        console.log(err);
-        process.exit(1);
+const listenIP = "localhost";<br>
+const listenPort = 8080;<br>
+fastify.listen(listenPort, listenIP, function (err, address) {<br>
+    if (err) {<br>
+        console.log(err);<br>
+        process.exit(1);<br>
     }
-    console.log(`Server listening on ${address}`);
-})
+    console.log(`Server listening on ${address}`);<br>
+})<br>
 
 ### [Home Page](https://slynsky.github.io)
 
